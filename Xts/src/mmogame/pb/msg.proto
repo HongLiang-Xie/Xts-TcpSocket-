@@ -1,0 +1,46 @@
+syntax="proto3"; //proto协议
+package pb; //包名
+option go_package="./;pb"; //给c#提供的选项
+
+message SyncPid { //服务器新生成玩家ID msgID =1
+	int32 Pid=1;
+}
+message Talk{ //世界聊天 msgID =2
+
+    string Content=1;
+}
+
+message Position{ // 玩家坐标 //广播玩家坐标msgID=3
+    float X=1;
+    float Y=2;
+    float Z=3;
+    float V=4;
+
+}
+
+message BroadCast{ //广播消息 msgID =200
+    int32 Pid=1;
+    int32 Tp=2; //1-世界聊天 2-玩家位置 3-动作 4-移动之后的坐标更新
+    oneof Data{
+        string Content=3; //玩家的聊天信息
+        Position P=4;   //广播玩家的位置
+        int32 ActionData=5; //玩家具体的动作
+    }
+}
+
+
+message SyncPlayers{ //同步玩家信息 msgID =202
+    repeated Player Ps=1;
+}
+message Player{
+    int32 Pid=1;
+    Position Pos=2;
+}
+
+
+message login{ // 用于玩家登录 msgID=203
+    int32 Type=1; // 1=登录 2注册
+    int32 ReturnType=2;  //1=登录成功 2=注册成功 3=登录失败 4=注册失败
+    string userid=3;
+    string password=4;
+}

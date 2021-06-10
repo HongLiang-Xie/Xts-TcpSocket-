@@ -1,0 +1,10 @@
+{
+	"Name":"QQ",
+	"Host":"localhost",
+	"TcpPort":8081,
+	"MaxConn":1000,
+	"MaxPackageSize":4096,
+	"Version":"v1.0",
+	"WorkPoolSize":10,
+	"MaxWorkTaskSize":10
+}
